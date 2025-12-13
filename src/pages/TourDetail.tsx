@@ -1,5 +1,3 @@
-// src/pages/TourDetail.tsx
-
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   Clock, 
@@ -90,6 +88,18 @@ export const TourDetail = () => {
     window.open(`https://wa.me/${contactInfo.whatsapp}?text=${message}`, '_blank');
   };
 
+  const handleCustomizeTour = () => {
+  const tourTitle = language === 'es' ? tour?.titleEs : language === 'en' ? tour?.titleEn : tour?.titleEs;
+  const message = encodeURIComponent(
+    t(
+      `Hola, estoy interesado en el tour: ${tourTitle}. Si este programa no se adapta a mis tiempos, me gustaría organizar mi visita de acuerdo a mis requerimientos y necesidades. ¿Podrían ayudarme?`,
+      `Hello, I am interested in the tour: ${tourTitle}. If this program does not fit my schedule, I would like to organize my visit according to my requirements and needs. Could you help me?`,
+      `Bonjour, je suis intéressé par le tour: ${tourTitle}. Si ce programme ne correspond pas à mes horaires, j'aimerais organiser ma visite selon mes exigences et besoins. Pourriez-vous m'aider ?`
+    )
+  );
+  window.open(`https://wa.me/${contactInfo.whatsapp}?text=${message}`, '_blank');
+};
+
   const handleEmail = () => {
     const tourTitle = language === 'es' ? tour?.titleEs : language === 'en' ? tour?.titleEn : tour?.titleEs;
     const subject = encodeURIComponent(
@@ -103,6 +113,22 @@ export const TourDetail = () => {
 
   const groupItineraryByDay = (itinerary: string[]) => {
     const grouped: { [key: string]: { main?: string; options: { label: string; text: string; color: string }[] } } = {};
+    
+    // Vérifier si l'itinéraire contient des jours
+    const hasDays = itinerary.some(step => /^(DÍA \d+|DAY \d+|JOUR \d+)/i.test(step));
+    
+    if (!hasDays) {
+      // Si pas de jours, créer une liste simple
+      grouped['simple'] = { 
+        main: '', 
+        options: itinerary.map(item => ({
+          label: '',
+          text: item,
+          color: ''
+        }))
+      };
+      return grouped;
+    }
     
     itinerary.forEach((step) => {
       const dayMatch = step.match(/^(DÍA \d+|DAY \d+|JOUR \d+)/i);
@@ -177,16 +203,16 @@ export const TourDetail = () => {
     return diff;
   };
 
-  const tourTitle = language === 'es' ? tour.titleEs : language === 'en' ? tour.titleEn : tour.titleEs;
-  const tourDesc = language === 'es' ? tour.descriptionEs : language === 'en' ? tour.descriptionEn : tour.descriptionEs;
-  const tourFullDesc = language === 'es' ? tour.fullDescriptionEs : language === 'en' ? tour.fullDescriptionEn : tour.fullDescriptionEs;
-  const tourItinerary = language === 'es' ? tour.itineraryEs : language === 'en' ? tour.itineraryEn : tour.itineraryEs;
-  const tourIncludes = language === 'es' ? tour.includesEs : language === 'en' ? tour.includesEn : tour.includesEs;
-  const tourExcludes = language === 'es' ? tour.excludesEs : language === 'en' ? tour.excludesEn : tour.excludesEs;
-  const tourRecommendations = language === 'es' ? tour.recommendationsEs : language === 'en' ? tour.recommendationsEn : tour.recommendationsEs;
-  const tourDeparture = language === 'es' ? tour.departureEs : language === 'en' ? tour.departureEn : tour.departureEs;
-  const tourSchedule = language === 'es' ? tour.scheduleEs : language === 'en' ? tour.scheduleEn : tour.scheduleEs;
-  const tourCancellation = language === 'es' ? tour.cancellationEs : language === 'en' ? tour.cancellationEn : tour.cancellationEs;
+  const tourTitle = language === 'es' ? tour.titleEs : language === 'en' ? tour.titleEn : tour.titleFr;
+  const tourDesc = language === 'es' ? tour.descriptionEs : language === 'en' ? tour.descriptionEn : tour.descriptionFr;
+  const tourFullDesc = language === 'es' ? tour.fullDescriptionEs : language === 'en' ? tour.fullDescriptionEn : tour.fullDescriptionFr;
+  const tourItinerary = language === 'es' ? tour.itineraryEs : language === 'en' ? tour.itineraryEn : tour.itineraryFr;
+  const tourIncludes = language === 'es' ? tour.includesEs : language === 'en' ? tour.includesEn : tour.includesFr;
+  const tourExcludes = language === 'es' ? tour.excludesEs : language === 'en' ? tour.excludesEn : tour.excludesFr;
+  const tourRecommendations = language === 'es' ? tour.recommendationsEs : language === 'en' ? tour.recommendationsEn : tour.recommendationsFr;
+  const tourDeparture = language === 'es' ? tour.departureEs : language === 'en' ? tour.departureEn : tour.departureFr;
+  const tourSchedule = language === 'es' ? tour.scheduleEs : language === 'en' ? tour.scheduleEn : tour.scheduleFr;
+  const tourCancellation = language === 'es' ? tour.cancellationEs : language === 'en' ? tour.cancellationEn : tour.cancellationFr;
 
   const groupedItinerary = groupItineraryByDay(tourItinerary);
 
@@ -338,10 +364,12 @@ export const TourDetail = () => {
               </h2>
               <div className="space-y-6">
                 {Object.entries(groupedItinerary).map(([day, content], dayIndex) => (
-                  <div key={dayIndex} className="border-l-4 border-orange-500 pl-6">
-                    <div className="inline-block px-4 py-2 bg-orange-500 text-white font-bold rounded-lg mb-4 shadow-md">
-                      {day}
-                    </div>
+                  <div key={dayIndex} className={day === 'simple' ? '' : 'border-l-4 border-orange-500 pl-6'}>
+                    {day !== 'simple' && (
+                      <div className="inline-block px-4 py-2 bg-orange-500 text-white font-bold rounded-lg mb-4 shadow-md">
+                        {day}
+                      </div>
+                    )}
                     
                     {content.main && (
                       <p className="text-gray-700 leading-relaxed mb-4 bg-gray-50 p-4 rounded-lg">
@@ -352,11 +380,20 @@ export const TourDetail = () => {
                     {content.options.length > 0 && (
                       <div className="space-y-3">
                         {content.options.map((option, optionIndex) => (
-                          <div key={optionIndex} className={`${option.color} border-2 rounded-lg p-4 shadow-sm`}>
-                            <div className="inline-block px-3 py-1 bg-gray-800 text-white font-bold rounded-md mb-3 text-sm">
-                              {option.label}
-                            </div>
-                            <p className="text-gray-700 leading-relaxed">{option.text}</p>
+                          <div key={optionIndex}>
+                            {option.color ? (
+                              <div className={`${option.color} border-2 rounded-lg p-4 shadow-sm`}>
+                                <div className="inline-block px-3 py-1 bg-gray-800 text-white font-bold rounded-md mb-3 text-sm">
+                                  {option.label}
+                                </div>
+                                <p className="text-gray-700 leading-relaxed">{option.text}</p>
+                              </div>
+                            ) : (
+                              <div className="flex items-start space-x-2">
+                                <span className="text-orange-500 font-bold mt-1">•</span>
+                                <span className="text-gray-700 leading-relaxed">{option.text}</span>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -415,7 +452,9 @@ export const TourDetail = () => {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+              {/* Card Prix - Existante */}
               <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 shadow-2xl text-white">
                 <div className="text-center mb-6">
                   <p className="text-sm font-semibold uppercase tracking-wide mb-2 opacity-90">
@@ -440,48 +479,29 @@ export const TourDetail = () => {
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-xl p-6">
-                <h3 className="font-bold text-gray-900 mb-4">
-                  {t('Información Importante', 'Important Information', 'Informations Importantes')}
-                </h3>
-                
-                <div className="space-y-4 text-sm">
-                  <div className="flex items-start space-x-3">
-                    <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-gray-900">{t('Punto de partida', 'Meeting point', 'Point de départ')}</p>
-                      <p className="text-gray-600">{tourDeparture}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3">
-                    <Calendar className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-semibold text-gray-900">{t('Horarios', 'Schedule', 'Horaires')}</p>
-                      <p className="text-gray-600">{tourSchedule}</p>
-                    </div>
-                  </div>
-                  
-                  {tour.minAge !== undefined && tour.minAge > 0 && (
-                    <div className="flex items-start space-x-3">
-                      <Users className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-gray-900">{t('Edad mínima', 'Minimum age', 'Âge minimum')}</p>
-                        <p className="text-gray-600">{tour.minAge} {t('años', 'years', 'ans')}</p>
-                      </div>
-                    </div>
-                  )}
+              {/* NOUVELLE CARD - Programme personnalisé */}
+              <div className="bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl p-6 shadow-xl text-white">
+                <div className="text-center mb-4">
+                  <h3 className="text-lg font-bold mb-2">
+                    {t('¿Necesitas flexibilidad?', 'Need flexibility?', 'Besoin de flexibilité ?')}
+                  </h3>
+                  <p className="text-sm opacity-95 mb-4">
+                    {t('Si este programa no se adapta a sus tiempos, con gusto organizamos su visita de acuerdo a sus requerimientos y necesidades', 
+                      'If this program does not fit your schedule, we will gladly organize your visit according to your requirements and needs',
+                      'Si ce programme ne correspond pas à vos horaires, nous organisons volontiers votre visite selon vos exigences et besoins')}
+                  </p>
                 </div>
+                
+                <button
+                  onClick={handleCustomizeTour}
+                  className="w-full py-3 bg-white text-orange-600 font-bold rounded-lg transition-all hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  {t('Personalizar tour por WhatsApp', 'Customize via WhatsApp', 'Personnaliser via WhatsApp')}
+                </button>
               </div>
 
-              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5 text-blue-600" />
-                  {t('Precio e Información', 'Price & Information', 'Prix & Informations')}
-                </h3>
-                <p className="text-sm text-gray-700 leading-relaxed">{tourCancellation}</p>
-              </div>
-
+              {/* Card Medios de Pago - Existante */}
               <div className="bg-green-50 rounded-xl p-6 border border-green-200">
                 <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <DollarSign className="w-5 h-5 text-green-600" />
@@ -500,6 +520,7 @@ export const TourDetail = () => {
               </div>
             </div>
           </div>
+          </div>
         </div>
 
         {similarTours.length > 0 && (
@@ -509,8 +530,8 @@ export const TourDetail = () => {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {similarTours.map((similarTour) => {
-                const simTitle = language === 'es' ? similarTour.titleEs : language === 'en' ? similarTour.titleEn : similarTour.titleEs;
-                const simDesc = language === 'es' ? similarTour.descriptionEs : language === 'en' ? similarTour.descriptionEn : similarTour.descriptionEs;
+                const simTitle = language === 'es' ? similarTour.titleEs : language === 'en' ? similarTour.titleEn : similarTour.titleFr;
+                const simDesc = language === 'es' ? similarTour.descriptionEs : language === 'en' ? similarTour.descriptionEn : similarTour.descriptionFr;
                 
                 return (
                   <div
@@ -530,32 +551,33 @@ export const TourDetail = () => {
                     </div>
                     
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-slate-900 mb-2">{simTitle}</h3>
-                      <p className="text-gray-600 mb-4">{simDesc}</p>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3 text-sm text-gray-700">
-                          <div className="flex items-center space-x-1">
-                            <Clock className="w-4 h-4 text-blue-600" />
-                            <span>{similarTour.duration}</span>
-                          </div>
-                          {similarTour.difficulty && (
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">{simTitle}</h3>
+                        <p className="text-gray-600 mb-4">{simDesc}</p>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3 text-sm text-gray-700">
                             <div className="flex items-center space-x-1">
-                              <TrendingUp className="w-4 h-4 text-orange-500" />
-                              <span>{translateDifficulty(similarTour.difficulty)}</span>
+                              <Clock className="w-4 h-4 text-blue-600" />
+                              <span>{similarTour.duration}</span>
                             </div>
-                          )}
+                            {similarTour.difficulty && (
+                              <div className="flex items-center space-x-1">
+                                <TrendingUp className="w-4 h-4 text-orange-500" />
+                                <span>{translateDifficulty(similarTour.difficulty)}</span>
+                              </div>
+                            )}
+                          </div>
+                          <span className="font-bold text-orange-500">{similarTour.price}</span>
                         </div>
-                        <span className="font-bold text-orange-500">{similarTour.price}</span>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-    </div>
+
   );
 };

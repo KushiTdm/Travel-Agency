@@ -41,10 +41,11 @@ export const Hero = () => {
           className="text-xl md:text-2xl text-center mb-12 max-w-3xl font-light"
         >
           {t(
-            'Más que un tour, una experiencia social liderada por ex-mineros.',
-            'More than a tour, a social experience led by former miners.',
-            'Plus qu\'un tour, une expérience sociale menée par d\'anciens mineurs.'
-          )}
+  'Más que un tour, una experiencia liderada por pioneros en servicios turísticos',
+  'More than a tour, an experience led by pioneers in tourism services.',
+  'Plus qu’un tour, une expérience menée par des pionniers des services touristiques.'
+)
+}
         </motion.p>
 
         <motion.button

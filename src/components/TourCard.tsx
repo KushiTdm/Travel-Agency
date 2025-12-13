@@ -3,6 +3,7 @@
 import { Clock, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { tours } from '../data/tours';
 
 interface TourCardProps {
   id: string;
@@ -34,6 +35,11 @@ export const TourCard = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Récupérer le tour complet pour avoir titleFr et descriptionFr
+  const tour = tours.find(t => t.id === id);
+  const title = language === 'es' ? titleEs : language === 'en' ? titleEn : (tour?.titleFr || titleEs);
+  const description = language === 'es' ? descriptionEs : language === 'en' ? descriptionEn : (tour?.descriptionFr || descriptionEs);
+
   const translateDifficulty = (diff?: string) => {
     if (!diff) return '';
     if (language === 'es') return diff;
@@ -55,17 +61,17 @@ export const TourCard = ({
       <div className="relative h-56 overflow-hidden cursor-pointer" onClick={handleLearnMore}>
         <img
           src={image}
-          alt={t(titleEs, titleEn, titleEs)}
+          alt={title}
           className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
         />
       </div>
 
       <div className="p-6">
         <h3 className="text-xl font-bold text-slate-900 mb-2 cursor-pointer hover:text-orange-500 transition-colors" onClick={handleLearnMore}>
-          {t(titleEs, titleEn, titleEs)}
+          {title}
         </h3>
         <p className="text-gray-600 mb-4 leading-relaxed">
-          {t(descriptionEs, descriptionEn, descriptionEs)}
+          {description}
         </p>
 
         <div className="flex flex-wrap gap-3 text-sm text-gray-700 mb-6">

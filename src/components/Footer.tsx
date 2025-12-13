@@ -176,7 +176,8 @@ export const Footer = () => {
                     onClick={() => handleMapClick('Av. Potosí 636, Ciudad de Uyuni, Potosí, Bolivia')} 
                     className="hover:text-orange-500 transition-colors text-left text-xs"
                   >
-                    Av. Potosí # 636 entre Santa Cruz y Colombia<br/>
+                    Av. Potosí # 636 entre Santa Cruz y Colombia, a lado del Banco Mercantil
+                    <br/>
                     Ciudad de Uyuni, Potosí, Bolivia
                   </button>
                 </li>

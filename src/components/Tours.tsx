@@ -47,18 +47,24 @@ export const Tours = () => {
   return (
     <section id="tours" className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          {/* TITRES MODIFIÉS ICI */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            {t('Nuestras Aventuras en el Sur de Bolivia', 'Our Adventures in Southern Bolivia')}
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-            {t(
-              'Descubre los Desiertos blancos, lagunas de colores y maravillas del altiplano boliviano',
-              'Discover the white deserts, colorful lagoons and wonders of the Bolivian highlands'
-            )}
-          </p>
-        </div>
+       <div className="text-center mb-12 sm:mb-16">
+  {/* TITRES MODIFIÉS ICI */}
+  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+    {t(
+      'Nuestras Aventuras en el Sur de Bolivia',
+      'Our Adventures in Southern Bolivia',
+      'Nos aventures dans le sud de la Bolivie'
+    )}
+  </h2>
+  <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+    {t(
+      'Descubre los Desiertos blancos, lagunas de colores y maravillas del altiplano boliviano',
+      'Discover the white deserts, colorful lagoons and wonders of the Bolivian highlands',
+      'Découvrez les déserts blancs, les lagunes colorées et les merveilles de l’altiplano bolivien'
+    )}
+  </p>
+</div>
+
 
         {/* Carousel Container */}
         <div className="relative">
