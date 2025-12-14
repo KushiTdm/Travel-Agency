@@ -47,6 +47,14 @@ export const TourDetail = () => {
     }
   };
 
+  // Fonction pour obtenir le prix avec traduction
+    const getTranslatedPrice = (price, t) => {
+      if (price === 'Consultar') {
+        return t('Consultar', 'Contact us', 'Nous consulter');
+      }
+      return price;
+    };
+
   const contactInfo = getContactInfo();
 
   if (!tour) {
@@ -210,10 +218,6 @@ export const TourDetail = () => {
   const tourIncludes = language === 'es' ? tour.includesEs : language === 'en' ? tour.includesEn : tour.includesFr;
   const tourExcludes = language === 'es' ? tour.excludesEs : language === 'en' ? tour.excludesEn : tour.excludesFr;
   const tourRecommendations = language === 'es' ? tour.recommendationsEs : language === 'en' ? tour.recommendationsEn : tour.recommendationsFr;
-  const tourDeparture = language === 'es' ? tour.departureEs : language === 'en' ? tour.departureEn : tour.departureFr;
-  const tourSchedule = language === 'es' ? tour.scheduleEs : language === 'en' ? tour.scheduleEn : tour.scheduleFr;
-  const tourCancellation = language === 'es' ? tour.cancellationEs : language === 'en' ? tour.cancellationEn : tour.cancellationFr;
-
   const groupedItinerary = groupItineraryByDay(tourItinerary);
 
   return (
@@ -302,7 +306,7 @@ export const TourDetail = () => {
               
               <div className="inline-flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-full font-bold text-xl shadow-lg">
                 <DollarSign className="w-6 h-6" />
-                <span>{tour.price}</span>
+                <span>{getTranslatedPrice(tour.price, t)}</span>
               </div>
             </div>
             
@@ -460,7 +464,9 @@ export const TourDetail = () => {
                   <p className="text-sm font-semibold uppercase tracking-wide mb-2 opacity-90">
                     {t('Precio por persona', 'Price per person', 'Prix par personne')}
                   </p>
-                  <p className="text-4xl font-bold mb-1">{tour.price}</p>
+                  <p className="text-4xl font-bold mb-1">
+                    {getTranslatedPrice(tour.price, t)}
+                  </p>
                   <p className="text-sm opacity-90">
                     {t('Reserva ahora', 'Book now', 'Réservez maintenant')}
                   </p>
