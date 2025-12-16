@@ -140,7 +140,7 @@ export const tours: Tour[] = [
     minAge: 0,
     
     recommendationsEs: [
-      'La Reserva Eduardo Avaroa y el salar de Uyuni tienen un clima muy frío, ventoso y con alta radiación solar',
+      'La Reserva Eduardo Avaroa y el salar de Uyuni tienen un clima muy frío, ventoso y con alta radiación solar, recomendamos :',
       'Suéter para el frío',
       'Chamarra',
       'Guantes',
@@ -154,7 +154,7 @@ export const tours: Tour[] = [
       'Entre diciembre y abril se recomienda llevar un impermeable para la lluvia'
     ],
     recommendationsEn: [
-      'The Eduardo Avaroa Reserve and the Uyuni salt flat have a very cold, windy climate with high solar radiation',
+      'The Eduardo Avaroa Reserve and the Uyuni salt flat have a very cold, windy climate with high solar radiation, we recommend:',
       'Sweater for the cold',
       'Jacket',
       'Gloves',
@@ -168,7 +168,7 @@ export const tours: Tour[] = [
       'Between December and April it is recommended to bring a raincoat'
     ],
     recommendationsFr: [
-      'La Réserve Eduardo Avaroa et le salar d\'Uyuni ont un climat très froid, venteux et avec une forte radiation solaire',
+      'La Réserve Eduardo Avaroa et le salar d\'Uyuni ont un climat très froid, venteux et avec une forte radiation solaire, nous recommendons :',
       'Pull pour le froid',
       'Veste',
       'Gants',
@@ -493,7 +493,7 @@ export const tours: Tour[] = [
     minAge: 12,
     
     recommendationsEs: [
-      'La Reserva Eduardo Avaroa y el salar de Uyuni tienen un clima muy frío, ventoso y con alta radiación solar. Por el día generalmente hace sol y la temperatura es agradable.',
+      'La Reserva Eduardo Avaroa y el salar de Uyuni tienen un clima muy frío, ventoso y con alta radiación solar. Por el día generalmente hace sol y la temperatura es agradable. Recomendamos :',
       'Buena aclimatación a la altura (el tour alcanza 5.000 m.s.n.m)',
       'Ropa adecuada para el frío (-15°C recomendado)',
       'Gorra o sombrero que cubra muy bien del sol',
@@ -509,7 +509,7 @@ export const tours: Tour[] = [
       'Dinero en efectivo (no existe cajero automático en la ruta)'
     ],
     recommendationsEn: [
-      'The Eduardo Avaroa Reserve and the Uyuni salt flat have a very cold, windy climate with high solar radiation. During the day there is usually sun and the temperature is pleasant.',
+      'The Eduardo Avaroa Reserve and the Uyuni salt flat have a very cold, windy climate with high solar radiation. During the day there is usually sun and the temperature is pleasant. We recommend :',
       'Good altitude acclimatization (the tour reaches 5,000 m.a.s.l.)',
       'Appropriate clothing for cold (-15°C recommended)',
       'Cap or hat that covers very well from the sun',
@@ -525,7 +525,7 @@ export const tours: Tour[] = [
       'Cash (there is no ATM on the route)'
     ],
     recommendationsFr: [
-      'La Réserve Eduardo Avaroa et le salar d\'Uyuni ont un climat très froid, venteux et avec une forte radiation solaire. Pendant la journée, il y a généralement du soleil et la température est agréable.',
+      'La Réserve Eduardo Avaroa et le salar d\'Uyuni ont un climat très froid, venteux et avec une forte radiation solaire. Pendant la journée, il y a généralement du soleil et la température est agréable. Nous recommendaons :',
       'Bonne acclimatation à l\'altitude (le tour atteint 5,000 m)',
       'Vêtements appropriés pour le froid (-15°C recommandé)',
       'Casquette ou chapeau qui couvre très bien du soleil',

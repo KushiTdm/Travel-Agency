@@ -69,7 +69,7 @@ export const Navbar = () => {
               Tours
             </button>
             <button onClick={() => scrollToSection('about')} className="hover:text-orange-500 transition-colors">
-              {t('Nosotros', 'About', 'À Propos')}
+              {t('Nosotros', 'About us', 'À Propos')}
             </button>
             <button onClick={() => scrollToSection('contact')} className="hover:text-orange-500 transition-colors">
               {t('Contacto', 'Contact', 'Contact')}

@@ -41,7 +41,7 @@ export const WhyChooseUs = () => {
       descEs: 'Realizamos tours en todo el territorio boliviano, principalmente en las ciudades de Sucre, Potosí y el sudoeste potosino (Uyuni, Tupiza, Villazón) así como Santa Cruz, La Paz y Tarija, ofreciendo programas privados y en compartido, clásicos y personalizados que se adecuan a las necesidades de nuestros clientes. Ofrecemos servicio de transporte turístico en todo el territorio nacional que se caracteriza por la puntualidad, seguridad y confianza con conductores bilingües, altamente capacitados para brindar un servicio de calidad. Dentro de nuestra oferta, contamos con la reserva y venta de pasajes aéreos y terrestres nacionales e internacionales.',
       descEn: 'We conduct tours throughout Bolivian territory, mainly in the cities of Sucre, Potosí and southwestern Potosí (Uyuni, Tupiza, Villazón) as well as Santa Cruz, La Paz and Tarija, offering private and shared programs, classic and personalized that adapt to the needs of our clients. We offer tourist transportation service throughout the national territory that is characterized by punctuality, security and trust with bilingual drivers, highly trained to provide quality service. Within our offer, we have the reservation and sale of national and international air and land tickets.',
       descFr: 'Nous organisons des tours sur tout le territoire bolivien, principalement dans les villes de Sucre, Potosí et le sud-ouest de Potosí (Uyuni, Tupiza, Villazón) ainsi que Santa Cruz, La Paz et Tarija, offrant des programmes privés et partagés, classiques et personnalisés qui s\'adaptent aux besoins de nos clients. Nous offrons un service de transport touristique sur tout le territoire national caractérisé par la ponctualité, la sécurité et la confiance avec des chauffeurs bilingues, hautement qualifiés pour fournir un service de qualité. Dans notre offre, nous proposons la réservation et la vente de billets aériens et terrestres nationaux et internationaux.',
-      image: '/Logov2.jpeg'
+      image: '/Logov2.webp'
     },
     {
       icon: Users,
@@ -142,9 +142,6 @@ export const WhyChooseUs = () => {
             </span>
             <span className="bg-orange-100 text-orange-800 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-1">
               🇫🇷 Français
-            </span>
-            <span className="bg-orange-100 text-orange-800 px-3 py-1.5 rounded-full text-sm font-semibold flex items-center gap-1">
-              🏔️ Quechua
             </span>
           </div>
         </div>
